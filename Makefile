@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -Wall -Wextra -g -std=c11 -I/opt/homebrew/include/SDL2 
+CFLAGS = -Wall -Wextra -g -std=c11 -I/opt/homebrew/include/SDL2
 LDFLAGS = -lSDL2 -L/opt/homebrew/lib $(sdl2-config --cflags --libs)
 
 OBJS = map.o player.o init.o raycaster.o main.o 

@@ -10,6 +10,10 @@ float dist(int x1, int y1, int x2, int y2) {
 	return sqrt((x2-x1) * (x2-x1) + (y2-y1) * (y2-y1));
 }
 
+void render_ray() {
+	return;
+}
+
 void cast_every_ray(Player *player, Map *map, SDL_Renderer *renderer) {
 	float first_angle = player->theta - (FOV / 2);
 	float angle_step = FOV / SCREEN_WIDTH;
@@ -28,8 +32,7 @@ void cast_every_ray(Player *player, Map *map, SDL_Renderer *renderer) {
 			SDL_SetRenderDrawColor(renderer, 0, 0, 200, 255);
 		}
 
-		// hwh = 20000.0f / ((float) cos(player->theta - cur_angle) * cur_ray->distance);
-		hwh = 1024.0f / (cosf(fabs(player->theta - cur_angle)) * cur_ray->distance);
+		hwh = cosf(fabs(player->theta - cur_angle)) != 0 ? 1536.0f / (cosf(fabs(player->theta - cur_angle)) * cur_ray->distance) : INFINITY;
 		printf("%d\n", hwh);
 		SDL_RenderDrawLine(renderer, i, SCREEN_HEIGHT / 2 - hwh,
 									 i, SCREEN_HEIGHT / 2 + hwh);
@@ -42,8 +45,8 @@ void cast_every_ray(Player *player, Map *map, SDL_Renderer *renderer) {
 Ray *cast_ray(Player *player, Map *map, float angle) {
 	Ray *ray = malloc(sizeof(Ray));
 	printf("a\n");
-	float dx_1 = TILE_SIZE * (1 - fmod(player->y, TILE_SIZE) / TILE_SIZE) / fmax(tan(angle), 0.0000000001);
-	float dx = TILE_SIZE / fmax(tan(angle), 0.0000000001);
+	float dx_1 = tan(angle) != 0 ? TILE_SIZE * (1 - fmod(player->y, TILE_SIZE) / TILE_SIZE) / tan(angle) : INFINITY;
+	float dx = tan(angle) != 0 ? TILE_SIZE / tan(angle) : INFINITY;
 	printf("b\n");
 	float dy_1 = TILE_SIZE * (1 - fmod(player->x, TILE_SIZE) / TILE_SIZE) * tan(angle);
 	float dy = TILE_SIZE * tan(angle); 
