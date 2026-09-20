@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	// Init to middle of first non-wall block, angled at 0.3 rads
-	Player *player = init_player(TILE_SIZE * 3 / 2, TILE_SIZE * 3 /2, 0.3f); 
+	Player *player = init_player(TILE_SIZE * 3 / 2, TILE_SIZE * 3 /2, 0.3f);
 	Map *map = init_map();
 
 	SDL_Event e;
